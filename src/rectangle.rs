@@ -1,15 +1,16 @@
+
+use crate::shape::Shape;
+
 #[derive(Debug)]
 pub struct Rectangle {
     pub name: String,
     pub color: Option<String>,
-    pub width: i32,
-    pub height: i32,
+    pub width: f64,
+    pub height: f64,
 }
 
 impl Rectangle {
-    pub fn area(&self) -> i32 {
-        return self.width * self.height;
-    }
+
     pub fn show_info(&self) {
         let col = match &self.color {
             Some(x) => x,
@@ -27,5 +28,11 @@ impl Rectangle {
             Some(x) => return Ok(x.to_string()),
             None => return Err(String::from("color is N/A.")),
         };
+    }
+}
+
+impl Shape for Rectangle {
+    fn area(&self) -> f64 {
+        return self.width * self.height;
     }
 }
