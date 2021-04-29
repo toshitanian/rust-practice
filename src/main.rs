@@ -1,3 +1,5 @@
+use std::mem;
+
 #[derive(Debug)]
 struct Rectangle {
     name: String,
@@ -7,15 +9,6 @@ struct Rectangle {
 }
 
 impl Rectangle {
-    fn new(name: String, width: i32, height: i32) -> Rectangle {
-        return Rectangle {
-            name: name,
-            color: None,
-            width: width,
-            height: height,
-        }
-    }
-
     fn area(&self) -> i32 {
         return self.width * self.height;
     }
@@ -74,5 +67,16 @@ fn main() {
     r2.show_info();
 
     // Use box for the rect
+    let r3 = Box::new(Rectangle {
+        name: String::from("rect 3"),
+        color: None,
+        width: 10,
+        height: 10,
+    });
+    r3.show_info();
 
+    println!("rectangle occupies {} bytes on the stack", mem::size_of_val(&r2));
+    println!("Box of rectangle occupies {} bytes on the stack. This is the size of pointer.", mem::size_of_val(&r3));
+    let r3_unboxed = *r3;
+    println!("Unboxed rectangle occupies {} bytes on the stack. This is the size of pointer.", mem::size_of_val(&r3_unboxed));
 }
