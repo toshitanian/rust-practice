@@ -3,12 +3,21 @@ struct Rectangle {
     name: String,
     color: Option<String>,
     width: i32,
-    heigh: i32,
+    height: i32,
 }
 
 impl Rectangle {
+    fn new(name: String, width: i32, height: i32) -> Rectangle {
+        return Rectangle {
+            name: name,
+            color: None,
+            width: width,
+            height: height,
+        }
+    }
+
     fn area(&self) -> i32 {
-        return self.width * self.heigh;
+        return self.width * self.height;
     }
     fn show_info(&self) {
         let col = match &self.color {
@@ -34,7 +43,7 @@ fn main() {
         name: String::from("rect 1"),
         color: Some(String::from("pink")),
         width: 10,
-        heigh: 20,
+        height: 20,
     };
     // Can print struct with derive(Debug)
     println!("{:?}", r1);
@@ -51,7 +60,7 @@ fn main() {
         name: String::from("rect 2"),
         color: None,
         width: 100,
-        heigh: 50,
+        height: 50,
     };
     // Can print struct with derive(Debug)
     println!("{:?}", r2);
@@ -63,4 +72,7 @@ fn main() {
     r2.set_color(String::from("red"));
 
     r2.show_info();
+
+    // Use box for the rect
+
 }
